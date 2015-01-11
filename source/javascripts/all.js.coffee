@@ -7,7 +7,7 @@ $ ->
   for status, i in game.field()
     $li = $('<i/>').addClass('grid').addClass('grid')
     $li.attr({ 'data-grid-location': i })
-    $li.text('□')
+    $li.text('?')
 
     $li.mousedown (e) ->
       return if game.isCompleted() or game.isOver()
@@ -16,17 +16,17 @@ $ ->
       switch e.which
         when 3
           game.mark(location)
-          $(@).text('?') if game.field()[location] == 'marked'
+          $(@).text('x') if game.field()[location] == 'marked'
         when 1
-          game.reveal(location)
+          number = game.reveal(location)
 
           if game.isCompleted()
-            $(@).text('　')
+            $(@).text(number)
             alert('Completed!')
           else if game.isOver()
             $(@).text('●～*')
             alert('Game Over!')
           else
-            $(@).text('　')
+            $(@).text(number)
 
     $('.field').append($li)
