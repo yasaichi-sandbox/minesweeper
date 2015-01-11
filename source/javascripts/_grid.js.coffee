@@ -4,9 +4,13 @@ Function::property = (prop, desc) ->
 class window.Grid
   constructor: (args) ->
     _mined = if args.mined is true then true else false
-
     @isMined = -> _mined
+
+    @_number = if args.number? then args.number else 0
     @_status = 'unmarked'
+
+  @property 'number',
+    get: -> @_number
 
   @property 'status',
     get: -> @_status

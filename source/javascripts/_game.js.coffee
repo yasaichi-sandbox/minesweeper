@@ -20,6 +20,7 @@ class window.Game
       return if not grid? or @isCompleted() or @isOver()
 
       grid.status = 'revealed'
+      grid.number
 
     @isCompleted = ->
       _field.grids.every((gird) ->

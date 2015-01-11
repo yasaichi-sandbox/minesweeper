@@ -1,5 +1,22 @@
 class window.Field
   constructor: (args = {}) ->
-    indices = [0..(args.nRow * args.nCol - 1)]
-    locations = [0..(args.nMine - 1)] # 地雷の場所を固定
-    @grids = (new Grid(mined: i in locations) for i in indices)
+    nRow = args.nRow
+    nCol = args.nCol
+    nMine = args.nMine
+
+    # TODO 不完全なシャッフル
+    mineLocation = [0..(nRow * nCol - 1)].sort(-> Math.random()-.5)[0..(nMine-1)]
+    field = ([(nCol * r)..(nCol * (r+1) - 1)] for r in [0..(nRow-1)])
+
+    @grids = []
+    for r in [0..(nRow-1)]
+      for c in [0..(nCol-1)]
+        location = field[r][c]
+
+        # TODO ほんとひどい実装
+        sum = (a,b) -> a + b
+        number = ((field[r+i]?[c+j] in mineLocation for j in [-1..1]).reduce(sum) for i in [-1..1]).reduce(sum)
+        number -= 1 if location in mineLocation
+
+        grid = new Grid(mined: location in mineLocation, number: number)
+        @grids.push(grid)
