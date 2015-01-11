@@ -17,5 +17,8 @@ gem "tzinfo-data", platforms: [:mswin, :mingw]
 gem "slim"
 gem "html2slim"
 
+# jquery
+gem "jquery-middleman", require: false
+
 # deply
 gem "middleman-deploy"
