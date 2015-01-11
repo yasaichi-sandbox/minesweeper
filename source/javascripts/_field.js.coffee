@@ -14,8 +14,7 @@ class window.Field
         location = field[r][c]
 
         # TODO ほんとひどい実装
-        sum = (a,b) -> a + b
-        number = ((field[r+i]?[c+j] in mineLocation for j in [-1..1]).reduce(sum) for i in [-1..1]).reduce(sum)
+        number = ((field[r+i]?[c+j] in mineLocation for j in [-1..1]).sum() for i in [-1..1]).sum()
         number -= 1 if location in mineLocation
 
         grid = new Grid(mined: location in mineLocation, number: number)
