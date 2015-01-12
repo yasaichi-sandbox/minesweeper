@@ -3,30 +3,31 @@ class window.Game
     args.nRow ?= 5
     args.nCol ?= 5
     args.nMine ?= 5
+    field = new window.Field(args)
 
-    _nGrid = args.nRow * args.nCol
-    _field = new window.Field(args)
+    isCompleted = ->
+      field.grids.every (grid) ->
+        (grid.isRevealed() and not grid.isMined()) or (not grid.isRevealed() and grid.isMined())
 
-    @field = -> (grid.status for grid in _field.grids)
+    isOver = ->
+      field.grids.some (grid) -> grid.isRevealed() and grid.isMined()
 
-    @mark = (location) ->
-      grid = _field.grids[location]
-      return if not grid? or @isCompleted() or @isOver()
+    @buildFiled = ->
+      $grids = field.grids.map (grid) ->
+        $grid = $('<li/>').addClass('grid').text('?').mousedown (e) ->
+          return if isCompleted() or isOver()
 
-      grid.status = 'marked'
+          switch e.which
+            when 3 # 左クリック
+              $(@).text('x') if grid.setMarked()
+            when 1 # 右クリック
+              if not grid.setRevealed()
+                return
+              else if grid.isMined()
+                $(@).text('●～*')
+                alert('Game Over!')
+              else
+                $(@).text(grid.number)
+                alert('Completed!') if isCompleted()
 
-    @reveal= (location) ->
-      grid = _field.grids[location]
-      return if not grid? or @isCompleted() or @isOver()
-
-      grid.status = 'revealed'
-      grid.number
-
-    @isCompleted = ->
-      _field.grids.every((gird) ->
-        (gird.isRevealed() and not gird.isMined()) or (not gird.isRevealed() and gird.isMined())
-      )
-
-    @isOver = ->
-      _field.grids.some((gird) -> gird.isRevealed() and gird.isMined())
-
+      $('<ul/>').addClass('field').append($grids)

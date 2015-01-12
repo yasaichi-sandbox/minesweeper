@@ -1,22 +1,13 @@
-Function::property = (prop, desc) ->
-    Object.defineProperty @prototype, prop, desc
-
 class window.Grid
-  constructor: (args) ->
-    _mined = if args.mined is true then true else false
-    @isMined = -> _mined
+  constructor: (args = {}) ->
+    @mined  = if args.mined is true then true else false
+    @number = args.number if args.number?
+    @status = 'unmarked'
 
-    @_number = if args.number? then args.number else 0
-    @_status = 'unmarked'
+  isMarked:   -> @status is 'marked'
+  isMined:    -> @mined  is true
+  isRevealed: -> @status is 'revealed'
+  isUnmarked: -> @status is 'unmarked'
 
-  @property 'number',
-    get: -> @_number
-
-  @property 'status',
-    get: -> @_status
-    set: (status) ->
-      return if @_status is 'revealed'
-      @_status = status if status in ['marked', 'revealed', 'unmarked']
-
-  isRevealed: -> @_status is 'revealed'
-  isMarked: -> @_status is 'marked'
+  setMarked:   -> if @isUnmarked() then @status = 'marked';   true else false
+  setRevealed: -> if @isUnmarked() then @status = 'revealed'; true else false
