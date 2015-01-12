@@ -1,2 +1,3 @@
-# sum
-Array.prototype.sum = -> @.reduce((a,b) -> a + b)
+# like Ruby
+Array.prototype.count = (condition) -> @.filter(condition).length
+Array.prototype.flatten = -> [].concat.apply([], @)
