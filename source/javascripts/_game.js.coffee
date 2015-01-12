@@ -14,7 +14,7 @@ class window.Game
 
     @buildFiled = ->
       $grids = field.grids.map (grid) ->
-        $grid = $('<li/>').addClass('grid').text('?').mousedown (e) ->
+        $('<li/>').addClass('grid').text('?').mousedown (e) ->
           return if isCompleted() or isOver()
 
           switch e.which
