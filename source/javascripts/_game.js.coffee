@@ -19,7 +19,10 @@ class window.Game
 
           switch e.which
             when 3 # 左クリック
-              $(@).text('x') if grid.setMarked()
+              if grid.setMarked()
+                $(@).text('x')
+              else if grid.setUnmarked()
+                $(@).text('?')
             when 1 # 右クリック
               if not grid.setRevealed()
                 return

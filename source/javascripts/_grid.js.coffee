@@ -11,3 +11,4 @@ class window.Grid
 
   setMarked:   -> if @isUnmarked() then @status = 'marked';   true else false
   setRevealed: -> if @isUnmarked() then @status = 'revealed'; true else false
+  setUnmarked: -> if @isMarked()   then @status = 'unmarked'; true else false
