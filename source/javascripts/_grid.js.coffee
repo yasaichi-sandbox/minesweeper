@@ -1,7 +1,7 @@
 class window.Grid
   constructor: (args = {}) ->
     @mined  = args.mined is true
-    @number = args.number if args.number?
+    @number = args.number || 0
     @status = 'unmarked'
 
   isMarked:   -> @status is 'marked'
