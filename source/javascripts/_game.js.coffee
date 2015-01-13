@@ -1,8 +1,8 @@
 class window.Game
   constructor: (args = {}) ->
-    args.nRow ?= 5
-    args.nCol ?= 5
-    args.nMine ?= 5
+    args.nRow = 5 unless args.nRow > 0
+    args.nCol = 5 unless args.nCol > 0
+    args.nMine = 5 unless args.nMine > 0
     field = new window.Field(args)
 
     isCompleted = ->
@@ -14,7 +14,7 @@ class window.Game
 
     @buildFiled = ->
       $grids = field.grids.map (grid) ->
-        $('<li/>').addClass('grid').text('?').mousedown (e) ->
+        $('<td/>').addClass('grid').text('?').mousedown (e) ->
           return if isCompleted() or isOver()
 
           switch e.which
@@ -33,4 +33,6 @@ class window.Game
                 $(@).text(grid.number)
                 alert('Completed!') if isCompleted()
 
-      $('<ul/>').addClass('field').append($grids)
+      $rows = ($('<tr/>').addClass('row') for [1..args.nRow])
+      $grids.forEach ($grid, i) -> $rows[i // args.nCol].append($grid)
+      $('<table/>').addClass('field').append($rows)
