@@ -3,6 +3,7 @@ class window.Field
     nRow = args.nRow
     nCol = args.nCol
     nMine = args.nMine
+    throw new Error 'nMine is too large!' unless nMine < nRow * nCol
 
     # TODO 不完全なシャッフル
     mineIndices = [0..(nRow * nCol - 1)].sort(-> Math.random()-.5)[0..(nMine-1)]

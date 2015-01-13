@@ -1,8 +1,8 @@
 class window.Game
   constructor: (args = {}) ->
-    args.nRow ?= 5
-    args.nCol ?= 5
-    args.nMine ?= 5
+    args.nRow = 5 unless args.nRow > 0
+    args.nCol = 5 unless args.nCol > 0
+    args.nMine = 5 unless args.nMine > 0
     field = new window.Field(args)
 
     isCompleted = ->
