@@ -1,0 +1,60 @@
+.wrapper {
+  border: 1px solid;
+  margin: $standard-space;
+  display: inline-block;
+}
+
+#minesweeper {
+  @include bump;
+  padding: $standard-space;
+
+  .menu {
+    margin-bottom: $standard-space;
+    text-align: center;
+
+    & > ul {
+      margin-bottom: $standard-space;
+
+      & > li {
+        margin: 0px $standard-space;
+        display: inline-block;
+      }
+    }
+  }
+
+  .field {
+    @include dent;
+    font-weight: bold;
+    box-sizing: border-box;
+
+    .row {
+      .grid {
+        @include bump;
+        width: 46px;
+        height: 46px;
+        text-align: center;
+        vertical-align: middle;
+        box-sizing: border-box;
+
+        &.is-marked {
+          color: #fb0000;
+        }
+
+        &.is-revealed {
+          border: 2px solid;
+          border-color: #6d6d6d;
+
+          &.is-mined {
+            background-color: #fb0000;
+          }
+
+          @each $n, $color in $number-colors {
+            &.is-number-#{$n} {
+              color: $color
+            }
+          }
+        }
+      }
+    }
+  }
+}
