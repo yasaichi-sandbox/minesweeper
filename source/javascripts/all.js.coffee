@@ -13,4 +13,4 @@ $ ->
     $(@).serializeArray().forEach (o) -> args[o.name] = o.value
 
     game = new window.Game(args)
-    $minesweeper.append(game.buildFiled())
+    $minesweeper.append(game.field)

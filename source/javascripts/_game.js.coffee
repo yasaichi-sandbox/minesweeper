@@ -1,9 +1,11 @@
 class window.Game
   constructor: (args = {}) ->
-    args.nRow = 5 unless args.nRow > 0
-    args.nCol = 5 unless args.nCol > 0
-    args.nMine = 5 unless args.nMine > 0
-    field = new window.Field(args)
+    nRow =  Math.floor(args.nRow) || 5
+    nCol =  Math.floor(args.nCol) || 5
+    nMine = Math.floor(args.nMine) || 1
+    field = new window.Field(nRow: nRow, nCol: nCol, nMine: nMine)
+
+    isEnded = false
 
     isCompleted = ->
       field.grids.every (grid) ->
@@ -12,27 +14,12 @@ class window.Game
     isOver = ->
       field.grids.some (grid) -> grid.isRevealed() and grid.isMined()
 
-    @buildFiled = ->
-      $grids = field.grids.map (grid) ->
-        $('<td/>').addClass('grid').text('?').mousedown (e) ->
-          return if isCompleted() or isOver()
-
-          switch e.which
-            when 3 # 左クリック
-              if grid.setMarked()
-                $(@).text('x')
-              else if grid.setUnmarked()
-                $(@).text('?')
-            when 1 # 右クリック
-              if not grid.setRevealed()
-                return
-              else if grid.isMined()
-                $(@).text('●～*')
-                alert('Game Over!')
-              else
-                $(@).text(grid.number)
-                alert('Completed!') if isCompleted()
-
-      $rows = ($('<tr/>').addClass('row') for [1..args.nRow])
-      $grids.forEach ($grid, i) -> $rows[i // args.nCol].append($grid)
-      $('<table/>').addClass('field').append($rows)
+    @field = new window.FieldDecorator(field).toDom().click (e) ->
+      if isEnded
+        return
+      else if isCompleted()
+        alert('Completed!')
+        isEnded = true
+      else if isOver()
+        alert('Game Over!')
+        isEnded = true
