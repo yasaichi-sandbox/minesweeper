@@ -1,16 +1,34 @@
 ---
 title: minesweeper
 ---
-div#minesweeper
-  form#menu
-    ul
-      li
-        | #Row: 
-        input type='text' name='nRow' size='2' value='5'
-      li
-        | #Column: 
-        input type='text' name='nCol' size='2' value='5'
-      li
-        | #Mine: 
-        input type='text' name='nMine' size='2' value='5'
-    input type='submit' value='Start!'
+div.wrapper
+  div#minesweeper
+    form.menu
+      ul
+        li
+          select> name='nRow'
+            - (1..10).each do |n|
+              - if n == 5
+                option value="#{n}" selected='selected' = n
+              - else
+                option value="#{n}" = n
+          |x
+          select< name='nCol'
+            - (1..10).each do |n|
+              - if n == 5
+                option value="#{n}" selected='selected' = n
+              - else
+                option value="#{n}" = n
+
+        li
+          i> class='fa fa-certificate'
+          |x
+          select< name='nMine'
+            - (1..10).each do |i|
+              - n = i * 5
+              - if n == 5
+                option value="#{n}" selected='selected' = n
+              - else
+                option value="#{n}" = n
+
+      input type='submit' value='Start!'

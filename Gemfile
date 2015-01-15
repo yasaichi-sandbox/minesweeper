@@ -22,3 +22,6 @@ gem "jquery-middleman", require: false
 
 # deply
 gem "middleman-deploy"
+
+# Font-Awesome
+gem "font-awesome-middleman"

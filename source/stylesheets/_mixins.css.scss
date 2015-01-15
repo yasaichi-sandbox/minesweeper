@@ -1,0 +1,10 @@
+@mixin bump {
+  border: 4px solid;
+  border-color: #fff #6d6d6d #6d6d6d #fff;
+  background-color: #bbb;
+}
+
+@mixin dent {
+  border: 4px solid;
+  border-color: #6d6d6d #fff #fff #6d6d6d;
+}

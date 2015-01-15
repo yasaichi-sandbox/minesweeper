@@ -1,13 +1,9 @@
 @charset 'utf-8';
+@import 'font-awesome';
+@import '_variables';
+@import '_mixins';
 @import '_normalize';
-
-.field {
-  .row {
-    .grid {
-      width: 50px;
-      height: 50px;
-      border: 1px solid;
-      text-align: center;
-    }
-  }
-}
+@import '_reset';
+@import '_base';
+@import '_layout';
+@import '_project';
