@@ -4,7 +4,7 @@
 $ ->
   $(document).on('contextmenu', (e) -> false)
 
-  buildField = (e) ->
+  $menu = $('#minesweeper .menu').submit (e) ->
     e.preventDefault() if e?
 
     args = {}
@@ -15,5 +15,4 @@ $ ->
     $minesweeper.find('.field').remove()
     $minesweeper.append(game.field)
 
-  buildField()
-  $('#minesweeper .menu').submit(buildField)
+  $menu.submit()

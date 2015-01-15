@@ -6,28 +6,28 @@ div.wrapper
     form.menu
       ul
         li
-          select> name="nRow"
+          select> name='nRow'
             - (1..10).each do |n|
               - if n == 5
-                option value="#{n}" selected="selected" = n
+                option value="#{n}" selected='selected' = n
               - else
                 option value="#{n}" = n
           |x
-          select< name="nCol"
+          select< name='nCol'
             - (1..10).each do |n|
               - if n == 5
-                option value="#{n}" selected="selected" = n
+                option value="#{n}" selected='selected' = n
               - else
                 option value="#{n}" = n
 
         li
           i> class='fa fa-certificate'
           |x
-          select< name="nMine"
+          select< name='nMine'
             - (1..10).each do |i|
               - n = i * 5
               - if n == 5
-                option value="#{n}" selected="selected" = n
+                option value="#{n}" selected='selected' = n
               - else
                 option value="#{n}" = n
 

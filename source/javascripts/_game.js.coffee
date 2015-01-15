@@ -14,12 +14,15 @@ class window.Game
     isOver = ->
       field.grids.some (grid) -> grid.isRevealed() and grid.isMined()
 
-    @field = new window.FieldDecorator(field).toDom().mousedown (e) =>
+    @field = new window.FieldDecorator(field).toDom().mousedown (e) ->
       if isEnded or e.which is 3
         return
       else if isCompleted()
-        isEnded = true
         alert('Completed!')
       else if isOver()
-        isEnded = true
         alert('Game Over!')
+      else
+        return
+
+      isEnded = true
+      $(@).find('.grid').unbind('mousedown')

@@ -1,6 +1,6 @@
 class window.FieldDecorator extends window.BaseDecorator
   constructor: (field) ->
-    super(object: field, tag: 'td')
+    super(object: field, tag: 'table')
 
     grids = GridDecorator.decorateCollection(@object.grids).map (grid, index, self) =>
       grid.toDom().mousedown (e) =>
