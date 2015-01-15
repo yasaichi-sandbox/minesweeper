@@ -5,7 +5,7 @@ $ ->
   $(document).on('contextmenu', (e) -> false)
 
   $menu = $('#minesweeper .menu').submit (e) ->
-    e.preventDefault() if e?
+    e.preventDefault()
 
     args = {}
     $(@).serializeArray().forEach (o) -> args[o.name] = o.value
