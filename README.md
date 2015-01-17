@@ -1,4 +1,7 @@
 # minesweeper
+
+![screenshot](source/images/screenshot.png)
+
 This app is a minesweeper clone I wrote in early 2015.
 
 ## Requirements
